@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import QRCode from "react-qr-code";
+import Image from "next/image";
 
-export default function Home() {
+export default function Page() {
   const [pdf, setPdf] = useState<File | null>(null);
   const [emergencyContact, setEmergencyContact] = useState("");
   const [pcpName, setPcpName] = useState("");
@@ -12,12 +13,8 @@ export default function Home() {
   const [error, setError] = useState<string | null>(null);
 
   const handleUpload = async () => {
-    console.log("Upload clicked", { pdf, emergencyContact, pcpName, pcpContact });
     if (!pdf || !emergencyContact || !pcpName || !pcpContact) {
-      const message = "Please fill all fields!";
-      console.log(message);
-      alert(message);
-      setError(message);
+      setError("Please fill all fields!");
       return;
     }
 
@@ -28,74 +25,232 @@ export default function Home() {
     formData.append("pcpContact", pcpContact);
 
     try {
-      console.log("Sending fetch to /api/upload");
       const res = await fetch("/api/upload", {
         method: "POST",
         body: formData,
       });
-      console.log("Fetch response:", res.status, res.statusText);
-      const data = await res.json();
-      if (res.ok) {
-        console.log("Upload successful:", data);
-        setQr(data.qr);
-        setError(null);
-      } else {
-        console.error("API error:", data.error);
-        setError(data.error);
+
+      if (!res.ok) {
+        const errorData = await res.text();
+        throw new Error(errorData || "Upload failed.");
       }
+
+      const data = await res.json();
+      setQr(data.qr);
+      setError(null);
     } catch (err) {
-      console.error("Fetch error:", err);
-      setError((err as Error).message);
+      const message = err instanceof Error ? err.message : "An unknown error occurred.";
+      setError(message);
     }
   };
 
   return (
-    <div className="p-4 max-w-md mx-auto">
-      <h1 className="text-2xl font-bold mb-4">MedZKic - Patient Upload</h1>
-      <input
-        type="file"
-        accept="application/pdf"
-        onChange={(e) => {
-          const file = e.target.files?.[0] || null;
-          console.log("File selected:", file?.name);
-          setPdf(file);
-        }}
-        className="border p-2 w-full mb-2"
-      />
-      <input
-        type="text"
-        value={emergencyContact}
-        onChange={(e) => setEmergencyContact(e.target.value)}
-        placeholder="Emergency Contact"
-        className="border p-2 w-full mb-2"
-      />
-      <input
-        type="text"
-        value={pcpName}
-        onChange={(e) => setPcpName(e.target.value)}
-        placeholder="PCP Name"
-        className="border p-2 w-full mb-2"
-      />
-      <input
-        type="text"
-        value={pcpContact}
-        onChange={(e) => setPcpContact(e.target.value)}
-        placeholder="PCP Contact"
-        className="border p-2 w-full mb-2"
-      />
-      <button
-        onClick={handleUpload}
-        className="bg-blue-500 text-white p-2 rounded w-full"
-      >
-        Upload
-      </button>
-      {error && <p className="text-red-500 mt-2">{error}</p>}
-      {qr && (
-        <div className="mt-4">
-          <QRCode value={qr} className="mx-auto" />
-          <p className="text-center mt-2">{qr}</p>
+    <div className="min-h-screen bg-gray-100 font-sans text-gray-800">
+      {/* Header */}
+      <header className="bg-white shadow-md sticky top-0 z-10">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center">
+            <Image
+              src="/375b03a1-8a7d-4597-b333-2ffdf1b27f1a.png"
+              alt="MedZKic Logo"
+              width={40}
+              height={40}
+              className="mr-2"
+            />
+            <span className="text-2xl font-bold text-blue-900">MedZKic</span>
+          </div>
+          <nav className="space-x-6">
+            <a href="#background" className="text-teal-500 hover:text-teal-700">Background</a>
+            <a href="#benefits" className="text-teal-500 hover:text-teal-700">Benefits</a>
+            <a href="#impact" className="text-teal-500 hover:text-teal-700">Impact</a>
+          </nav>
         </div>
-      )}
+      </header>
+
+      {/* Hero Section */}
+      <section className="bg-blue-900 text-white py-20">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <h1 className="text-5xl font-extrabold mb-4 animate-fade-in">
+            MedZKic: Revolutionizing Healthcare Trust
+          </h1>
+          <p className="text-xl mb-8">
+            Secure, private, and cutting-edge medical records for the future.
+          </p>
+          <div className="flex justify-center">
+            <div className="w-full max-w-4xl">
+              <Image
+                src="/pexels-rdne-6519880.jpg"
+                alt="Healthcare Innovation"
+                width={1200}
+                height={800}
+                className="rounded-lg shadow-lg"
+                priority
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Upload Form */}
+      <section className="py-16 bg-white">
+        <div className="max-w-md mx-auto px-4">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6 text-center">
+            Upload Your Medical Record
+          </h2>
+          <div className="bg-gray-50 p-6 rounded-lg shadow-md">
+            <input
+              type="file"
+              accept="application/pdf"
+              onChange={(e) => setPdf(e.target.files?.[0] || null)}
+              className="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+            />
+            <input
+              type="text"
+              value={emergencyContact}
+              onChange={(e) => setEmergencyContact(e.target.value)}
+              placeholder="Emergency Contact"
+              className="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+            />
+            <input
+              type="text"
+              value={pcpName}
+              onChange={(e) => setPcpName(e.target.value)}
+              placeholder="Primary Care Physician Name"
+              className="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+            />
+            <input
+              type="text"
+              value={pcpContact}
+              onChange={(e) => setPcpContact(e.target.value)}
+              placeholder="PCP Contact"
+              className="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+            />
+            <button
+              onClick={handleUpload}
+              className="w-full bg-teal-500 text-white p-3 rounded-md hover:bg-teal-600 transition-colors"
+            >
+              Secure Upload
+            </button>
+            {error && <p className="text-red-500 mt-2 text-center">{error}</p>}
+            {qr && (
+              <div className="mt-6 text-center">
+                <p className="text-blue-900 mb-2">Your Secure QR Code:</p>
+                <QRCode value={qr} className="mx-auto" />
+                <p className="text-sm text-gray-600 mt-2">{qr}</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Background Section */}
+      <section id="background" className="py-16 bg-gray-100">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Background</h2>
+          <p className="text-lg mb-6">
+            MedZKic harnesses zero-knowledge proofs and blockchain technology to secure patient data,
+            overcoming the inefficiencies and vulnerabilities of traditional electronic health record systems.
+            We’re pioneering a new era of healthcare innovation.
+          </p>
+          {/* Gallery */}
+          <div className="flex flex-wrap justify-center gap-6">
+            <div className="w-full sm:w-1/2 md:w-1/3 max-w-xs">
+              <Image
+                src="/pexels-rdne-6519880.jpg"
+                alt="Healthcare Tech 1"
+                width={400}
+                height={300}
+                className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div className="w-full sm:w-1/2 md:w-1/3 max-w-xs">
+              <Image
+                src="/pexels-cottonbro-6191532.jpg"
+                alt="Healthcare Tech 2"
+                width={400}
+                height={600}
+                className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div className="w-full sm:w-1/2 md:w-1/3 max-w-xs">
+              <Image
+                src="/pexels-rdne-6519880.jpg" // Placeholder—replace later
+                alt="Healthcare Tech 3"
+                width={400}
+                height={300}
+                className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section */}
+      <section id="benefits" className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Benefits</h2>
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <li className="bg-gray-50 p-4 rounded-md shadow-sm">
+              <h3 className="text-xl font-semibold text-teal-500">Privacy</h3>
+              <p>ZK proofs ensure sensitive data stays confidential.</p>
+            </li>
+            <li className="bg-gray-50 p-4 rounded-md shadow-sm">
+              <h3 className="text-xl font-semibold text-teal-500">Security</h3>
+              <p>Encrypted records on IPFS and blockchain prevent breaches.</p>
+            </li>
+            <li className="bg-gray-50 p-4 rounded-md shadow-sm">
+              <h3 className="text-xl font-semibold text-teal-500">Accessibility</h3>
+              <p>First responders access critical info instantly.</p>
+            </li>
+            <li className="bg-gray-50 p-4 rounded-md shadow-sm">
+              <h3 className="text-xl font-semibold text-teal-500">Efficiency</h3>
+              <p>Streamlines care, reducing delays and errors.</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      {/* Impact Section */}
+      <section id="impact" className="py-16 bg-gray-100">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-blue-900 mb-6">Why This Matters</h2>
+          <p className="text-lg mb-4">
+            Medical errors are the third leading cause of death in the US, costing over $20 billion annually
+            (Johns Hopkins, 2016). Inefficiencies in healthcare waste $760 billion yearly (JAMA, 2019).
+            MedZKic addresses these critical challenges:
+          </p>
+          <ul className="space-y-4">
+            <li>
+              <strong>Problem:</strong> Fragmented, insecure EHRs delay care and risk lives.
+            </li>
+            <li>
+              <strong>Solution:</strong> A decentralized, encrypted platform for instant, trusted access.
+            </li>
+            <li>
+              <strong>Impact:</strong> Could reduce errors by 30%, saving over $6 billion and countless lives
+              (projected estimate based on error reduction studies).
+            </li>
+          </ul>
+          <div className="flex justify-center mt-6">
+            <div className="w-full max-w-2xl">
+              <Image
+                src="/pexels-cottonbro-6191532.jpg"
+                alt="Healthcare Impact"
+                width={400}
+                height={600}
+                className="rounded-lg shadow-md"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-blue-900 text-white py-6">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <p>© 2025 MedZKic. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 }
