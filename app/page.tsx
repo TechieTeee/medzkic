@@ -1,4 +1,4 @@
-"use client"; // App Router needs this for client-side hooks
+"use client";
 
 import { useState } from "react";
 import QRCode from "react-qr-code";
@@ -35,7 +35,7 @@ export default function Home() {
       <input
         type="file"
         accept="application/pdf"
-        onChange={(e) => setPdf(e.target.files?.[0] || null)} // Handle undefined
+        onChange={(e) => setPdf(e.target.files?.[0] || null)}
         className="border p-2 w-full mb-2"
       />
       <input
