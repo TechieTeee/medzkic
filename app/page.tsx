@@ -60,17 +60,17 @@ export default function Page() {
             <span className="text-2xl font-bold text-blue-900">MedZKic</span>
           </div>
           <nav className="space-x-6">
-            <a href="#background" className="text-teal-500 hover:text-teal-700">Background</a>
-            <a href="#benefits" className="text-teal-500 hover:text-teal-700">Benefits</a>
-            <a href="#impact" className="text-teal-500 hover:text-teal-700">Impact</a>
+            <a href="#background" className="text-teal-500 hover:text-teal-700 transition-colors">Background</a>
+            <a href="#benefits" className="text-teal-500 hover:text-teal-700 transition-colors">Benefits</a>
+            <a href="#impact" className="text-teal-500 hover:text-teal-700 transition-colors">Impact</a>
           </nav>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="bg-blue-900 text-white py-20">
+      <section className="bg-blue-900 text-white py-20 cinematic-section">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <h1 className="text-5xl font-extrabold mb-4 animate-fade-in">
+          <h1 className="text-5xl font-extrabold mb-4 animate-fade-in glow-text">
             MedZKic: Revolutionizing Healthcare Trust
           </h1>
           <p className="text-xl mb-8">
@@ -83,7 +83,7 @@ export default function Page() {
                 alt="Healthcare Innovation"
                 width={1200}
                 height={800}
-                className="rounded-lg shadow-lg"
+                className="rounded-lg shadow-lg image-glow"
                 priority
               />
             </div>
@@ -154,31 +154,31 @@ export default function Page() {
           </p>
           {/* Gallery */}
           <div className="flex flex-wrap justify-center gap-6">
-            <div className="w-full sm:w-1/2 md:w-1/3 max-w-xs">
+            <div className="w-full sm:w-1/2 md:w-1/3 max-w-xs h-64 overflow-hidden">
               <Image
-                src="/pexels-rdne-6519880.jpg"
+                src="/pexels-laura-james-6098047.jpg"
                 alt="Healthcare Tech 1"
                 width={400}
                 height={300}
-                className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
+                className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300 object-cover w-full h-full"
               />
             </div>
-            <div className="w-full sm:w-1/2 md:w-1/3 max-w-xs">
+            <div className="w-full sm:w-1/2 md:w-1/3 max-w-xs h-64 overflow-hidden">
               <Image
-                src="/pexels-cottonbro-6191532.jpg"
+                src="/pexels-mart-production-7088526.jpg"
                 alt="Healthcare Tech 2"
                 width={400}
                 height={600}
-                className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
+                className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300 object-cover w-full h-full"
               />
             </div>
-            <div className="w-full sm:w-1/2 md:w-1/3 max-w-xs">
+            <div className="w-full sm:w-1/2 md:w-1/3 max-w-xs h-64 overflow-hidden">
               <Image
-                src="/pexels-rdne-6519880.jpg" // Placeholder—replace later
+                src="/pexels-tima-miroshnichenko-5452268.jpg"
                 alt="Healthcare Tech 3"
                 width={400}
                 height={300}
-                className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300"
+                className="rounded-lg shadow-md hover:scale-105 transition-transform duration-300 object-cover w-full h-full"
               />
             </div>
           </div>
@@ -190,19 +190,19 @@ export default function Page() {
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Benefits</h2>
           <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <li className="bg-gray-50 p-4 rounded-md shadow-sm">
+            <li className="bg-gray-50 p-4 rounded-md shadow-md hover:shadow-lg transition-shadow">
               <h3 className="text-xl font-semibold text-teal-500">Privacy</h3>
               <p>ZK proofs ensure sensitive data stays confidential.</p>
             </li>
-            <li className="bg-gray-50 p-4 rounded-md shadow-sm">
+            <li className="bg-gray-50 p-4 rounded-md shadow-md hover:shadow-lg transition-shadow">
               <h3 className="text-xl font-semibold text-teal-500">Security</h3>
               <p>Encrypted records on IPFS and blockchain prevent breaches.</p>
             </li>
-            <li className="bg-gray-50 p-4 rounded-md shadow-sm">
+            <li className="bg-gray-50 p-4 rounded-md shadow-md hover:shadow-lg transition-shadow">
               <h3 className="text-xl font-semibold text-teal-500">Accessibility</h3>
               <p>First responders access critical info instantly.</p>
             </li>
-            <li className="bg-gray-50 p-4 rounded-md shadow-sm">
+            <li className="bg-gray-50 p-4 rounded-md shadow-md hover:shadow-lg transition-shadow">
               <h3 className="text-xl font-semibold text-teal-500">Efficiency</h3>
               <p>Streamlines care, reducing delays and errors.</p>
             </li>
@@ -211,7 +211,7 @@ export default function Page() {
       </section>
 
       {/* Impact Section */}
-      <section id="impact" className="py-16 bg-gray-100">
+      <section id="impact" className="py-16 bg-gray-100 cinematic-section">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-blue-900 mb-6">Why This Matters</h2>
           <p className="text-lg mb-4">
@@ -219,7 +219,7 @@ export default function Page() {
             (Johns Hopkins, 2016). Inefficiencies in healthcare waste $760 billion yearly (JAMA, 2019).
             MedZKic addresses these critical challenges:
           </p>
-          <ul className="space-y-4">
+          <ul className="space-y-4 mb-8">
             <li>
               <strong>Problem:</strong> Fragmented, insecure EHRs delay care and risk lives.
             </li>
@@ -231,14 +231,14 @@ export default function Page() {
               (projected estimate based on error reduction studies).
             </li>
           </ul>
-          <div className="flex justify-center mt-6">
-            <div className="w-full max-w-2xl">
+          <div className="bg-blue-900 py-12 flex justify-center items-center">
+            <div className="w-full max-w-md mx-auto">
               <Image
                 src="/pexels-cottonbro-6191532.jpg"
                 alt="Healthcare Impact"
                 width={400}
                 height={600}
-                className="rounded-lg shadow-md"
+                className="rounded-lg shadow-lg image-glow"
               />
             </div>
           </div>
