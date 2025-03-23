@@ -1,5 +1,5 @@
-#![pexels-cottonbro-6191532](https://github.com/user-attachments/assets/a9222147-764b-4a7a-818e-d7a4f1b40cb8)
- MedZKic: Revolutionizing Healthcare Trust with Zero-Knowledge Proofs
+![375b03a1-8a7d-4597-b333-2ffdf1b27f1a-modified](https://github.com/user-attachments/assets/5abeb41b-9bb3-4725-b596-3764dfddf424)
+## MedZKic: Revolutionizing Healthcare Trust with Zero-Knowledge Proofs
 
 ## Overview
 MedZKic is a groundbreaking healthcare platform that leverages zero-knowledge proofs (ZKPs) and blockchain technology to secure electronic medical records (EMRs). It empowers patients with sovereignty over their data while ensuring privacy, security, and instant access for critical care scenarios.
