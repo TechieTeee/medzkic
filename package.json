@@ -1,5 +1,6 @@
 {
   "name": "medzkic",
+  "type": "module",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,6 +12,7 @@
   "dependencies": {
     "@neondatabase/serverless": "^0.10.4",
     "@pinata/sdk": "^2.1.0",
+    "alchemy-sdk": "^3.5.5",
     "circomlib": "^2.0.5",
     "next": "15.2.3",
     "nodemailer": "^6.10.0",
