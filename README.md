@@ -26,9 +26,6 @@ Traditional EHR systems are centralized, vulnerable to breaches, and inefficient
 
 
 ## Challenges Overcome
-- **Image Consistency:** Unified gallery image heights (256px) using flexbox and `object-cover`.
-- **UI Centering:** Fixed impact image alignment with `flex justify-center items-center` and `mx-auto`.
-- **Tailwind v4 Migration:** Adapted `globals.css` from v3 directives to v4 imports (`@import "tailwindcss"`) mid-development.
 - **ZK Integration:** Designed a circuit for MiMC proofs, balancing privacy and verifiability.
 
 ## Zero-Knowledge Focus
