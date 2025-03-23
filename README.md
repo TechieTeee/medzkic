@@ -1,4 +1,3 @@
-![375b03a1-8a7d-4597-b333-2ffdf1b27f1a-modified](https://github.com/user-attachments/assets/5abeb41b-9bb3-4725-b596-3764dfddf424)
 ## MedZKic: Revolutionizing Healthcare Trust with Zero-Knowledge Proofs
 
 ## Overview
