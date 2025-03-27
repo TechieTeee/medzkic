@@ -17,7 +17,7 @@ Traditional EHR systems are centralized, vulnerable to breaches, and inefficient
 
 ## Tools Used
 - **Next.js**: Frontend framework for a sleek, responsive UI.
-- **Tailwind CSS v4**: Styling with cinematic effects (glows, glassmorphism).
+- **Tailwind CSS v4**: Styling
 - **IPFS**: Decentralized storage for EMRs.
 - **Ethereum/ZK-Rollup**: Blockchain layer for security and scalability.
 - **React-QR-Code**: Generates patient-specific QR codes.
